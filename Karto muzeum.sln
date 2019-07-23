@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karto muzeum", "Karto muzeum.csproj", "{2EDCF7A1-4322-EEF8-E5D2-377592ECAE2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karto muzeum.Plugins", "Karto muzeum.Plugins.csproj", "{17D12602-5048-57EE-1D76-B6CAD153F06E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karto muzeum.Editor.Plugins", "Karto muzeum.Editor.Plugins.csproj", "{834E17ED-6681-5E4F-6946-51241AEC0D8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karto muzeum.Editor", "Karto muzeum.Editor.csproj", "{2A554E93-7EC3-DBD3-B379-4DE8970C1F03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EDCF7A1-4322-EEF8-E5D2-377592ECAE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EDCF7A1-4322-EEF8-E5D2-377592ECAE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EDCF7A1-4322-EEF8-E5D2-377592ECAE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EDCF7A1-4322-EEF8-E5D2-377592ECAE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D12602-5048-57EE-1D76-B6CAD153F06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D12602-5048-57EE-1D76-B6CAD153F06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D12602-5048-57EE-1D76-B6CAD153F06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D12602-5048-57EE-1D76-B6CAD153F06E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{834E17ED-6681-5E4F-6946-51241AEC0D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{834E17ED-6681-5E4F-6946-51241AEC0D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{834E17ED-6681-5E4F-6946-51241AEC0D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{834E17ED-6681-5E4F-6946-51241AEC0D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A554E93-7EC3-DBD3-B379-4DE8970C1F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A554E93-7EC3-DBD3-B379-4DE8970C1F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A554E93-7EC3-DBD3-B379-4DE8970C1F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A554E93-7EC3-DBD3-B379-4DE8970C1F03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
