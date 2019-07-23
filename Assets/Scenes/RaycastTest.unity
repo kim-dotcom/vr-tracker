@@ -401,8 +401,8 @@ GameObject:
   - component: {fileID: 1876854925}
   - component: {fileID: 1876854924}
   - component: {fileID: 1876854923}
-  - component: {fileID: 1876854927}
   - component: {fileID: 1876854928}
+  - component: {fileID: 1876854929}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -473,22 +473,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 14.932001, y: 0, z: 0}
---- !u!114 &1876854927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1876854922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba0093ac83de1e40bb868cb39b2c4d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastCamera: {fileID: 1876854925}
-  objectScale: 0.015
-  objectColor: {r: 0.14273354, g: 0.58823526, b: 0.18267508, a: 0}
-  visibleCursor: 1
-  logFrameDelay: 5
 --- !u!114 &1876854928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,3 +490,22 @@ MonoBehaviour:
   defaultColorLow: {r: 1, g: 1, b: 1, a: 0}
   defaultColorHigh: {r: 0.7921569, g: 0.21176471, b: 0.7058824, a: 0}
   failedDistanceColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+--- !u!114 &1876854929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1876854922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a74ead0917e117498c448bb3beae962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastCamera: {fileID: 1876854925}
+  objectType: 1
+  objectScale: 0.025
+  objectColor: {r: 0, g: 0.77205884, b: 0.13311362, a: 0}
+  objectsVisibleOnRaycast: 1
+  raycasterType: 0
+  logFrameDelay: 5
+  visibleCursor: 1

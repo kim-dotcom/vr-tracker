@@ -53,6 +53,7 @@ public class RaycasterEvaluator : MonoBehaviour {
                     thisObject.GetComponent<Renderer>().material.color =
                         Color.Lerp(defaultColorLow, defaultColorHigh, currentClusterSize / maxClusterSize);
                 }
+                thisObject.GetComponent<MeshRenderer>().enabled = true;
                 Debug.Log("Min distance of " + thisObject.name + ": " +  minimumDistance);
             }
         }

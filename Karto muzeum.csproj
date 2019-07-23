@@ -273,6 +273,7 @@
     <Compile Include="Assets\Scripts\MoveOnTrigger.cs" />
     <Compile Include="Assets\Scripts\RaycasterCube.cs" />
     <Compile Include="Assets\Scripts\RaycasterEvaluator.cs" />
+    <Compile Include="Assets\Scripts\RaycasterSource.cs" />
     <Compile Include="Assets\Scripts\ReticlePointer.cs" />
     <Compile Include="Assets\Scripts\ReticleToggle.cs" />
     <Compile Include="Assets\Scripts\RotateSelf.cs" />
