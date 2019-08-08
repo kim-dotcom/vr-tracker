@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RaycasterSource : MonoBehaviour {
     public enum RayObjects { cube, sphere };
@@ -23,13 +24,50 @@ public class RaycasterSource : MonoBehaviour {
     private string iteratedCubeName;
     private int frameCounter;
 
+    // for Pupil ET alone
+
+    [Space(5)]
+    [Header("PupilLabs Settings")]
+    [Space(10)]
+    public string CALSceneName;
+    public KeyCode rayCastKey;
+    private GameObject getGaze;
+    static bool CalHasBeenLoaded = false;
+    private bool Raycasting;
+
 	// Use this for initialization
 	void Start () {
-        Cursor.visible = visibleCursor;
-    }
 
+        if (raycasterType == RayTypes.mouse)
+        {
+        Cursor.visible = visibleCursor;
+
+        } else if (raycasterType == RayTypes.PupilLabs)
+        {
+            if (CalHasBeenLoaded == false)
+            {
+                CalHasBeenLoaded = true;
+                SceneManager.LoadScene(CALSceneName);
+
+            } else if (CalHasBeenLoaded == true)
+            {
+                getGaze = GameObject.Find("Gaze_3D");
+            }
+
+        } else if (raycasterType == RayTypes.HTC)
+        {
+            
+        }
+    }
+     
     void Update()
     {
+        // Turning PupilLabs raycasting ON/OFF (outside of the FrameDelay)
+
+        if (Input.GetKeyDown(rayCastKey)) {
+            Raycasting = !Raycasting;
+        }
+
         frameCounter++;
         if (frameCounter % logFrameDelay == 0)
         {
@@ -61,8 +99,38 @@ public class RaycasterSource : MonoBehaviour {
             //Raycaster: PupilLabs
             else if (raycasterType == RayTypes.PupilLabs)
             {
-               //...
+
+                if (Raycasting) {
+
+                    RaycastHit hit;
+
+                    var direction = getGaze.transform.position - raycastCamera.transform.position;
+
+                    //UnityEngine.Debug.DrawRay(Camera.main.transform.position, direction * 100000f, Color.green, 5f, false); // Visualize the rays (only in Scene window)
+
+                    if (Physics.Raycast(raycastCamera.transform.position, direction, out hit, Mathf.Infinity)) {
+
+                        GameObject hitObject = hit.collider.gameObject;
+                        iteratedCubeName = "cube" + itemIterator.ToString();
+                        itemIterator++;
+
+                        GameObject cube;
+                        if (objectType == RayObjects.cube)
+                        {
+                            cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        }
+                        else
+                        {
+                            cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                        }
+
+                        raycastCamera.GetComponent<PathScript3>().logEtData2(cube.transform.position);
+
+                        placeFixation(cube, hit, hitObject);
+                    }
+                }
             }
+
             //Raycaster: HTC (TBD)
             else if (raycasterType == RayTypes.HTC)
             {
