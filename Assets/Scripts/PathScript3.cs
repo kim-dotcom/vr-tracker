@@ -256,7 +256,7 @@ public class PathScript3 : MonoBehaviour
         if (logEyeTracking2)
         {
             string currentData = etCounter + "," + GetCurrentTime() + "," + GetCurrentPosition()
-                  + ", " + fixationPosition.x + ", " + fixationPosition.y + ", " + fixationPosition.z;
+                  + ", " + fixationPosition.x + ", " + fixationPosition.y + ", " + fixationPosition.z + "\r\n";
 
             //log, or buffer to log
             etBuffer += currentData;
