@@ -7,23 +7,28 @@ public class RaycasterSource : MonoBehaviour {
     public enum RayObjects { cube, sphere };
     public enum RayTypes { mouse, PupilLabs, HTC };
 
+    //the (player)camera - raycast origin
     public Camera raycastCamera;
+    [Space(10)]
 
-    [Space(10)]    
+    //how are they eye fixations visualized?
     public RayObjects objectType;
     public float objectScale = 0.025f;
     public Color objectColor;
-    public bool objectsVisibleOnRaycast;
-
+    public bool visibleOnCast;
     [Space(10)]
+
+    //raycast type - to allow for multiple devices/implementations
     public RayTypes raycasterType;    
     public float logFrameDelay = 5;
     public bool visibleCursor;
 
+    //serivce variables - fixation count, fixation object naming
     private int itemIterator = 0;
     private string iteratedCubeName;
     private int frameCounter;
 
+<<<<<<< Updated upstream
     // for Pupil ET alone
 
     [Space(5)]
@@ -40,8 +45,13 @@ public class RaycasterSource : MonoBehaviour {
 
         if (raycasterType == RayTypes.mouse)
         {
+=======
+    // ================================================================================================================
+    void Start () {
+>>>>>>> Stashed changes
         Cursor.visible = visibleCursor;
 
+<<<<<<< Updated upstream
         } else if (raycasterType == RayTypes.PupilLabs)
         {
             if (CalHasBeenLoaded == false)
@@ -68,33 +78,41 @@ public class RaycasterSource : MonoBehaviour {
             Raycasting = !Raycasting;
         }
 
+=======
+    // ================================================================================================================
+    void Update()
+    {
+        //process this every n-th frame (for performance constraints / data filtration)
+>>>>>>> Stashed changes
         frameCounter++;
         if (frameCounter % logFrameDelay == 0)
         {
             frameCounter = 0;
-            //Raycaster: mouse (dummy, no HMD)
+            //Raycaster: mouse, onClick (for testing/dummy, no HMD)
             if (raycasterType == RayTypes.mouse && Input.GetMouseButton(1))
             {
                 RaycastHit hit;
+                //ray: camera origin + mouse x/y coordinates, to worldspace
                 var ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
-                if (!Physics.Raycast(ray, out hit))
-                    return;
-
-                GameObject hitObject = hit.collider.gameObject;
-                iteratedCubeName = "cube" + itemIterator.ToString();
-                itemIterator++;
-                //Debug.Log("Hit " + hitObject.name, hit.collider.gameObject);
-
-                GameObject cube;
-                if (objectType == RayObjects.cube)
+                //if ray hit something (a meshCollider), process this
+                if (Physics.Raycast(ray, out hit))
                 {
-                    cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                }
-                else
-                {
-                    cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                }
-                placeFixation(cube, hit, hitObject);            
+                    //create an object at the hit corrdinate
+                    GameObject hitObject = hit.collider.gameObject;
+                    iteratedCubeName = "cube" + itemIterator.ToString();
+                    itemIterator++;
+                    //Debug.Log("Hit " + hitObject.name, hit.collider.gameObject);
+                    GameObject cube;
+                    if (objectType == RayObjects.cube)
+                    {
+                        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    }
+                    else
+                    {
+                        cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    }
+                    placeFixation(cube, hit, hitObject);
+                }                
             }
             //Raycaster: PupilLabs
             else if (raycasterType == RayTypes.PupilLabs)
@@ -139,6 +157,7 @@ public class RaycasterSource : MonoBehaviour {
         }        
     }
 
+    // ================================================================================================================
     void placeFixation (GameObject cube, RaycastHit hit, GameObject hitObject)
     {
         cube.name = iteratedCubeName;
@@ -147,9 +166,9 @@ public class RaycasterSource : MonoBehaviour {
         cube.GetComponent<Collider>().enabled = false; //so that they don't stack on each other
         cube.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; //not needed
         cube.GetComponent<Renderer>().receiveShadows = false; //not needed
-        cube.transform.parent = hitObject.transform;
+        cube.transform.parent = hitObject.transform; //group under the object it was fixated upon
         cube.transform.position = hit.point;
         cube.tag = "Respawn"; //so that the script to recompute finds this
-        cube.GetComponent<MeshRenderer>().enabled = objectsVisibleOnRaycast;
+        cube.GetComponent<MeshRenderer>().enabled = visibleOnCast;
     }
 }

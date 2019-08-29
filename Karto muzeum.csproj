@@ -271,6 +271,7 @@
     <Compile Include="Assets\Scripts\ClickRotatorRigidbody.cs" />
     <Compile Include="Assets\Scripts\CursorToggle.cs" />
     <Compile Include="Assets\Scripts\MoveOnTrigger.cs" />
+    <Compile Include="Assets\Scripts\PathScript3.cs" />
     <Compile Include="Assets\Scripts\RaycasterCube.cs" />
     <Compile Include="Assets\Scripts\RaycasterEvaluator.cs" />
     <Compile Include="Assets\Scripts\RaycasterSource.cs" />
