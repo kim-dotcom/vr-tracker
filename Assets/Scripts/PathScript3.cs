@@ -227,6 +227,7 @@ public class PathScript3 : MonoBehaviour
         }
     }
 
+    //object-based ET logger
 	public void logEtData(string objName, string objFocusType, string objCoordinates)
     {
         if (logEyeTracking)
@@ -244,6 +245,7 @@ public class PathScript3 : MonoBehaviour
         }
 	}
 
+    //coordinate-based ET logger
     public void logEtData2(Vector3 fixationPosition)
     {
         //to implement this, try the following:

@@ -27,63 +27,56 @@ public class RaycasterSource : MonoBehaviour {
     private int itemIterator = 0;
     private string iteratedCubeName;
     private int frameCounter;
-
-<<<<<<< Updated upstream
-    // for Pupil ET alone
-
-    [Space(5)]
-    [Header("PupilLabs Settings")]
     [Space(10)]
-    public string CALSceneName;
+
+    //output variables
+    public bool logToFile;
+    [Space(5)]
+
+    // for Pupil ET alone
+    [Header("PupilLabs Settings")]
+    public string calibrationSCName;
     public KeyCode rayCastKey;
     private GameObject getGaze;
-    static bool CalHasBeenLoaded = false;
-    private bool Raycasting;
+    static bool calibrationLoaded = false;
+    private bool isRaycasting;
 
 	// Use this for initialization
-	void Start () {
-
+	void Start ()
+    {
         if (raycasterType == RayTypes.mouse)
         {
-=======
-    // ================================================================================================================
-    void Start () {
->>>>>>> Stashed changes
-        Cursor.visible = visibleCursor;
-
-<<<<<<< Updated upstream
-        } else if (raycasterType == RayTypes.PupilLabs)
+            Cursor.visible = visibleCursor;
+        }
+        else if (raycasterType == RayTypes.PupilLabs)
         {
-            if (CalHasBeenLoaded == false)
+            if (calibrationLoaded == false)
             {
-                CalHasBeenLoaded = true;
-                SceneManager.LoadScene(CALSceneName);
+                calibrationLoaded = true;
+                SceneManager.LoadScene(calibrationSCName);
 
-            } else if (CalHasBeenLoaded == true)
+            }
+            else if (calibrationLoaded == true)
             {
                 getGaze = GameObject.Find("Gaze_3D");
             }
 
-        } else if (raycasterType == RayTypes.HTC)
+        }
+        else if (raycasterType == RayTypes.HTC)
         {
-            
+            //...
         }
     }
      
     void Update()
     {
         // Turning PupilLabs raycasting ON/OFF (outside of the FrameDelay)
-
-        if (Input.GetKeyDown(rayCastKey)) {
-            Raycasting = !Raycasting;
+        if (Input.GetKeyDown(rayCastKey))
+        {
+            isRaycasting = !isRaycasting;
         }
 
-=======
-    // ================================================================================================================
-    void Update()
-    {
         //process this every n-th frame (for performance constraints / data filtration)
->>>>>>> Stashed changes
         frameCounter++;
         if (frameCounter % logFrameDelay == 0)
         {
@@ -111,23 +104,24 @@ public class RaycasterSource : MonoBehaviour {
                     {
                         cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     }
+
+                    logFixation(cube);
                     placeFixation(cube, hit, hitObject);
                 }                
             }
             //Raycaster: PupilLabs
             else if (raycasterType == RayTypes.PupilLabs)
             {
-
-                if (Raycasting) {
-
+                if (isRaycasting)
+                {
                     RaycastHit hit;
-
                     var direction = getGaze.transform.position - raycastCamera.transform.position;
 
-                    //UnityEngine.Debug.DrawRay(Camera.main.transform.position, direction * 100000f, Color.green, 5f, false); // Visualize the rays (only in Scene window)
-
-                    if (Physics.Raycast(raycastCamera.transform.position, direction, out hit, Mathf.Infinity)) {
-
+                    // Visualize the rays (only in Scene window)
+                    //UnityEngine.Debug.DrawRay(Camera.main.transform.position, direction * 100000f, Color.green, 5f, false);
+                    
+                    if (Physics.Raycast(raycastCamera.transform.position, direction, out hit, Mathf.Infinity))
+                    {
                         GameObject hitObject = hit.collider.gameObject;
                         iteratedCubeName = "cube" + itemIterator.ToString();
                         itemIterator++;
@@ -142,8 +136,7 @@ public class RaycasterSource : MonoBehaviour {
                             cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                         }
 
-                        raycastCamera.GetComponent<PathScript3>().logEtData2(cube.transform.position);
-
+                        logFixation(cube);
                         placeFixation(cube, hit, hitObject);
                     }
                 }
@@ -170,5 +163,13 @@ public class RaycasterSource : MonoBehaviour {
         cube.transform.position = hit.point;
         cube.tag = "Respawn"; //so that the script to recompute finds this
         cube.GetComponent<MeshRenderer>().enabled = visibleOnCast;
+    }
+
+    void logFixation (GameObject cube)
+    {
+        if (logToFile)
+        {
+            raycastCamera.GetComponent<PathScript3>().logEtData2(cube.transform.position);
+        }
     }
 }
